@@ -24,7 +24,7 @@ object Demo {
 
     //写入
     //没有指明表示当前路径
-    val writer = new PrintWriter(new File("spark.txt"))
+    val writer = new PrintWriter(new File("README.txt"))
     for(i <- 1 to 100) writer.println(i)
     writer.close()
 

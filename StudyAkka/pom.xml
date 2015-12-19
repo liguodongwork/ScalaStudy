@@ -30,6 +30,7 @@
             <url>http://repo.typesafe.com/typesafe/releases/</url>
         </repository>
     </repositories>
+
     <build>
         <plugins>
             <plugin>

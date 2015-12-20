@@ -5,8 +5,8 @@ package akka.app.messages;
  * Created by liguodong on 2015/12/17.
  */
 public class WordCount {
-    private String word;
-    private Integer count;
+    private String word; //单词
+    private Integer count; //单词的计数
 
     public WordCount(String inWord,Integer inCount){
         word = inWord;

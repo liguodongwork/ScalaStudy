@@ -12,15 +12,20 @@ import akka.dispatch.Resume;
  */
 public class MasterActor extends UntypedActor{
 
+    //创建AggregateActor是由Akka系统创建的
+    //Master只是拿到的一个句柄引用
     private ActorRef aggregateActor = getContext().actorOf(
             new Props(AggregateActor.class),"aggregate");
+
+
+
 
     private ActorRef reduceActor = getContext().actorOf(
             new Props(new UntypedActorFactory(){
                 public UntypedActor create(){
-                    return new ReduceActor(aggregateActor   );
+                    return new ReduceActor(aggregateActor);
                 }
-            }),"reduce");
+            }),"reduce");//因为ReduceActor工作完成之后，要交给AggregateActor。
 
 
     private ActorRef mapActor = getContext().actorOf(
@@ -29,7 +34,6 @@ public class MasterActor extends UntypedActor{
                     return new MapActor(reduceActor);
                 }
             }),"map");
-
 
 
     @Override

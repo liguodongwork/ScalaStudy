@@ -25,12 +25,12 @@ public class ReduceActor extends UntypedActor{
 
     @Override
     public void onReceive(Object message) throws Exception {
-        if(message instanceof MapData){
+        if(message instanceof MapData){//对收到的MapActor进行处理
             MapData mapData = (MapData)message;
             //reduce the incoming data
-            ReduceData reduceData = reduce(mapData.getDataList());
+            ReduceData reduceData = reduce(mapData.getDataList());//对单词进行计数
             //forword the result to aggregate actor
-            aggregateActor.tell(reduceData);
+            aggregateActor.tell(reduceData);//发送给AggregateActor
         }else{
             unhandled(message);
         }
@@ -39,7 +39,7 @@ public class ReduceActor extends UntypedActor{
     private ReduceData reduce(List<WordCount> dataList){
         HashMap<String,Integer> reduceMap = new HashMap<String,Integer>();
         for(WordCount wordCount : dataList){
-            if(reduceMap.containsKey(wordCount.getWord())){
+            if(reduceMap.containsKey(wordCount.getWord())){//判断是否包含有这个单词
                 Integer value = (Integer)reduceMap.get(wordCount.getWord());
                 value++;
                 reduceMap.put(wordCount.getWord(),value);

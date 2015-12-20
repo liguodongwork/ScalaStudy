@@ -8,10 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 对最后所有的ReduceActor产生的结果进行统计
  * Created by liguodong on 2015/12/17.
  */
 public class AggregateActor extends UntypedActor{
 
+    //保存全局结果
     private Map<String,Integer> finalReducedMap = new HashMap<String,Integer>();
 
 
@@ -19,6 +21,7 @@ public class AggregateActor extends UntypedActor{
     public void onReceive(Object message) throws Exception {
         if(message instanceof ReduceData){
             ReduceData reduceData = (ReduceData) message;
+            //对本地reduce的结果进行全局的统计
             aggregateInMemoryReduce(reduceData.getReduceDataList());
         }else if(message instanceof Result){
             System.out.println(finalReducedMap.toString());

@@ -16,6 +16,7 @@
     </properties>
 
     <dependencies>
+        <!--Akka的版本-->
         <dependency>
             <groupId>com.typesafe.akka</groupId>
             <artifactId>akka-actor</artifactId>
@@ -24,6 +25,7 @@
     </dependencies>
 
     <repositories>
+        <!--库-->
         <repository>
             <id>typesafe</id>
             <name>Typesafe Repository</name>

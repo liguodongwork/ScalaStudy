@@ -17,11 +17,16 @@ class MasterActor extends Actor{
   //mapActor结果会交给reduceActor
   val mapActor:ActorRef = context.actorOf(Props(new MapActor(reduceActor)),name="map")
 
+  println("aggregateActor:"+aggregateActor.path)
+  println("reduceActor:"+reduceActor.path)
+  println("mapActor:"+mapActor.path)
+
   //进行消息匹配
   def receive: Receive = {
     //字符串
     case message:String =>
-      mapActor ! message
+      mapActor ! message //发送
+      //mapActor.forward(message) //转发
     //Result
     case message:Result =>
       aggregateActor ! message
